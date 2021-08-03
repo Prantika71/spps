@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GITHUB Users</title>
+   
+   
+</head>
+<body>
+  <button id ="press">Gitusers</button>
+  <h1>Github users</h1>
+  <section id="user"></section>
+  <script>
+    document.getElementById("press").addEventListener('click',getusers);
+
+
+
+    function getusers (){
+     
+
+           var req = new XMLHttpRequest();//engine being called here
+           req .open('GET', '  https://api.github.com/users');
+           req.onload =function(){
+            if(req.status==200){
+              var pepole = JSON.parse(req.responseText);
+            
+
+            var login = pepole.login;
+            var id =pepole.id;
+            var repos_url = pepole.repos_url;
+            var avatar_url = pepole.avatar_url;
+            var gists_url = pepole.gists_url;
+            var events_url = pepole.events_url;
+
+            var output = '';
+            for (var i in pepole)
+              { output +='<div>'+
+                '<img src ='+pepole[i].avatar_url + 'width ="100" height ="100">' +
+                '<ul>' +
+
+                  '<li>ID:'+' "'+ pepole[i].id+'"'+'</li>'+
+                 '<li>login:'+' "'+ pepole[i].login+'"'+'</li>'+
+                 
+
+                
+
+
+
+
+                  '</ul>'+
+                  '</div>';
+                document.getElementById('user').innerHTML = output;
+                } 
+               } 
+             }
+            
+            req.send();
+}
+
+  </script>
+</body>
+</html>
